@@ -1,6 +1,7 @@
-const router = require('express').Router()
-const Thought = require('../../models/Thought')
-const User = require('../../models/User')
+const router = require('express').Router();
+const Thought = require('../../models/Thought');
+const User = require('../../models/User');
+
 router.get("/",async(req,res)=>{
     try {
         var AllThoughts = await Thought.find({})
@@ -97,4 +98,4 @@ router.delete("/:thoughtId/reactions/:reactionId",async({params},res)=>{
     }
 });
 
-module.exports=router
+module.exports = router

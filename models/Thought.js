@@ -1,34 +1,22 @@
-const {Schema, model} = require('mongoose');
+const {Schema,model}=require("mongoose")
 
-const ReactionSchema = require('./Reaction');
-
-const ThoughtSchema = new Schema({
-    thoughtText:{
+const ReactionSchema= new Schema({
+    reactionId:{
+        type:Schema.Types.ObjectId,
+        default: ()=> new Types.ObjectId()
+    },
+    reactionBody:{
         type:String,
-        trim:true,
-        required:'Thought text required',
-        maxLength : 280
+        required:"Reaction body is required",
+        max:280,
+    },
+    username:{
+        type:String,
+        required:"Username is required"
     },
     createdAt:{
         type:Date,
         default:Date.now
-    },
-    //The user that created this thought
-    username:{
-        type:String,
-        required:'Username required'
-    },
-    //Array of nested documents created with the reactionSchema
-    reactions:[
-        ReactionSchema
-    ]
-});
-
-ThoughtSchema.virtual('reactionCount',function(){
-    console.log(this.reactions);
-    return this.reactions.length
-});
-
-const Thought = model('Thought',ThoughtSchema);
-
-module.exports = Thought;
+    }
+})
+module.exports=ReactionSchema

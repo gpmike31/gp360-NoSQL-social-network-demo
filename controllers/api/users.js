@@ -1,7 +1,6 @@
-const router = require("express").Router();
-const User=require('../../models/User');
-const Thought = require('../../models/Thought');
-
+const router = require("express").Router()
+const User=require("../../models/User")
+const Thought = require("../../models/Thought")
 router.get("/",async (req,res)=>{
     try {
         var AllUsers= await User.find({})
@@ -9,8 +8,7 @@ router.get("/",async (req,res)=>{
     } catch (error) {
         res.status(500).json(error)
     }
-});
-
+})
 router.get("/:id", async(req,res)=>{
     try {
         var UserFound=await User.findById({_id:req.params.id})
@@ -19,8 +17,7 @@ router.get("/:id", async(req,res)=>{
         console.log(error);
         res.status(500).json(error)
     }
-});
-
+})
 router.post("/",async({body},res)=>{
     try {
         console.log(body);
@@ -28,8 +25,7 @@ router.post("/",async({body},res)=>{
     } catch (error) {
         res.status(500).json(error)
     }
-});
-
+})
 router.put("/:id",async({params,body},res)=>{
     try {
         var UpdatedUser=await User.findByIdAndUpdate(
@@ -41,8 +37,7 @@ router.put("/:id",async({params,body},res)=>{
     } catch (error) {
         res.status(500).json(error)
     }
-});
-
+})
 router.delete("/:id",async(req,res)=>{
     try {
         var deleted = await User.findByIdAndDelete({_id:req.params.id})
@@ -51,8 +46,7 @@ router.delete("/:id",async(req,res)=>{
     } catch (error) {
         res.status(500).json(error)
     }
-});
-
+})
 router.post("/:id/friends/:friendid",async({params},res)=>{
     try {
         var UpdatedUser=await User.updateOne(
@@ -63,8 +57,7 @@ router.post("/:id/friends/:friendid",async({params},res)=>{
         console.log(error);
         res.status(500).json(error)
     }
-});
-
+})
 router.delete("/:id/friends/:friendid",async({params},res)=>{
     try {
         var UpdatedUser = await User.updateOne(
@@ -76,7 +69,7 @@ router.delete("/:id/friends/:friendid",async({params},res)=>{
         console.log(error);
         res.status(500).json(error)
     }
-});
+})
 
 
-module.exports = router
+module.exports=router

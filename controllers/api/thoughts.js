@@ -1,7 +1,6 @@
-const router = require('express').Router();
-const Thought = require('../../models/Thought');
-const User = require('../../models/User');
-
+const router = require("express").Router()
+const Thought = require("../../models/Thought")
+const User=require("../../models/User")
 router.get("/",async(req,res)=>{
     try {
         var AllThoughts = await Thought.find({})
@@ -10,8 +9,7 @@ router.get("/",async(req,res)=>{
         console.log(error);
         res.status(500).json(error)
     }
-});
-
+})
 router.get("/:id",async(req,res)=>{
     try {
         var SingleThought = await Thought.findById(
@@ -22,8 +20,7 @@ router.get("/:id",async(req,res)=>{
         console.log(error);
         res.status(500).json(error)
     }
-});
-
+})
 router.post("/",async({body},res)=>{
     try {
         Thought.create(body).then(async(dbthought)=>{
@@ -37,8 +34,7 @@ router.post("/",async({body},res)=>{
         console.log(error);
         res.status(500).json(error)
     }
-});
-
+})
 router.delete("/all",async(req,res)=>{
     try {
         var emptydoc = await Thought.deleteMany({})
@@ -60,8 +56,7 @@ router.put("/:id",async({params,body},res)=>{
         console.log(error);
         res.status(500).json(error)
     }
-});
-
+})
 router.delete("/:id",async({params},res)=>{
     try {
         var DeletedThought = await Thought.findByIdAndDelete({_id:params.id})
@@ -70,8 +65,7 @@ router.delete("/:id",async({params},res)=>{
         console.log(error);
         res.status(500).json(error)
     }
-});
-
+})
 router.post("/:thoughtId/reactions",async({params,body},res)=>{
     try {
         var UpdatedThought = await Thought.findByIdAndUpdate(
@@ -83,8 +77,7 @@ router.post("/:thoughtId/reactions",async({params,body},res)=>{
         console.log(error);
         res.status(500).json(error)
     }
-});
-
+})
 router.delete("/:thoughtId/reactions/:reactionId",async({params},res)=>{
     try {
         var UpdatedThought = await Thought.findByIdAndUpdate(
@@ -96,6 +89,6 @@ router.delete("/:thoughtId/reactions/:reactionId",async({params},res)=>{
         console.log(error);
         res.status(500).json(error)
     }
-});
+})
 
-module.exports = router
+module.exports=router

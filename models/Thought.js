@@ -1,6 +1,6 @@
 const {Schema, model} = require('mongoose');
 
-const reactionSchema = require('./Reaction');
+const ReactionSchema = require('./Reaction');
 
 const ThoughtSchema = new Schema({
     thoughtText:{
@@ -20,7 +20,7 @@ const ThoughtSchema = new Schema({
     },
     //Array of nested documents created with the reactionSchema
     reactions:[
-        reactionSchema
+        ReactionSchema
     ]
 });
 

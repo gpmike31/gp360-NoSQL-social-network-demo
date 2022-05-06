@@ -1,22 +1,27 @@
-const {Schema,model}=require("mongoose")
-
-const ReactionSchema= new Schema({
-    reactionId:{
-        type:Schema.Types.ObjectId,
-        default: ()=> new Types.ObjectId()
-    },
-    reactionBody:{
-        type:String,
-        required:"Reaction body is required",
-        max:280,
-    },
-    username:{
-        type:String,
-        required:"Username is required"
-    },
-    createdAt:{
-        type:Date,
-        default:Date.now
+const {Schema, model}= require("mongoose")
+const ReactionSchema=require("./Reaction")
+const ThoughtSchema=new Schema(
+    {
+        thoughtText:{
+            type:String,
+            trim:true,
+            required:"Thought text required"
+        },
+        createdAt:{
+            type:Date,
+            default:Date.now
+        },
+        username:{
+            type:String,
+            required:"Username required"
+        },
+        reactions:['${ReactionSchema}']
     }
+)
+ThoughtSchema.virtual("reactionCount").get(function(){
+    console.log(this.reactions);
+    return this.reactions.length
 })
-module.exports=ReactionSchema
+
+const Thought = model("Thought",ThoughtSchema)
+module.exports=Thought
